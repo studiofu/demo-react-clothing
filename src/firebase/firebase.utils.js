@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
+// configuration
 const config = {
   apiKey: "AIzaSyBBdeQkgxkarLHpQqtRQ2eSRVZZ6wBLj8Q",
   authDomain: "fir-react-clothing-db.firebaseapp.com",
@@ -13,6 +14,7 @@ const config = {
   measurementId: "G-VT1HRZDSYQ"
 };
 
+// use to create user data to the database
 export const createUserProfileDocument = async (userAuth, additionalData) => {
     if(!userAuth) return; // exit
     
