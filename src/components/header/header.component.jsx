@@ -1,14 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {auth} from '../../firebase/firebase.utils';
-
+import CartIcon from '../cart-icon/cart-icon.components';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import {ReactComponent as Logo} from '../../assests/crown.svg';
 
 import {connect} from 'react-redux';
 
 import './header.styles.scss';
 
-const Header = ({currentUser}) => {
+const Header = ({currentUser, hidden}) => {
     return (
         <div className='header'>
             <Link className='logo-containers' to='/'>
@@ -28,14 +29,25 @@ const Header = ({currentUser}) => {
                     </div> : 
                     <Link className='option' to='/signin'>SIGN IN</Link>
                 }
+                <CartIcon />
+                
             </div>
+            {
+                hidden ? null : <CartDropdown />
+            }
+            
         </div>
     )
 }
 
 // the params state is actually the root Reducer
-const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+// const mapStateToProps = (state) => ({
+//     currentUser: state.user.currentUser
+// })
+
+const mapStateToProps = ({user:{currentUser}, cart: {hidden}}) => ({
+    currentUser,
+    hidden
 })
 
 export default connect(mapStateToProps)(Header);
